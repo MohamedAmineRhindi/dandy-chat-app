@@ -50,7 +50,7 @@ const Register = ({
 
                 <button>Register</button>
             </form>
-            <span>Alread have an account ? <Link className='auth-container--link' to='/login'>Log In</Link></span>
+            <span>Already have an account ? <Link className='auth-container--link' to='/login'>Log In</Link></span>
         </div>
     )
 }

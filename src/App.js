@@ -39,17 +39,14 @@ function App() {
             loginPassword={loginPassword}
             setLoginPassword={setLoginPassword}
           />
-        }>
-
-        </Route>
+        } />
         <Route path='/register' element={
           <Register
             registerEmail={registerEmail}
             setRegisterEmail={setRegisterEmail}
             registerPassword={registerPassword}
             setRegisterPassword={setRegisterPassword} />
-        }>
-        </Route>
+        } />
       </Routes>
 
     </Router>

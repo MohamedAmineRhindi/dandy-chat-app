@@ -10,11 +10,15 @@ import { auth } from './firebaseConfig'
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate,
+  useNavigate,
+  BrowserRouter
 } from "react-router-dom";
 import Login from './pages/Login';
 import Register from './pages/Register';
 import User from './pages/User';
+import Home from './pages/Home';
 
 function App() {
 
@@ -27,8 +31,7 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-    });
-
+    })
   }, [])
 
   const register = async () => {
@@ -51,7 +54,6 @@ function App() {
         loginEmail,
         loginPassword
       )
-      console.log(user)
     } catch (error) {
       console.log(error.message)
     }
@@ -62,30 +64,31 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path='/login' element={
-          <Login
-            loginEmail={loginEmail}
-            setLoginEmail={setLoginEmail}
-            loginPassword={loginPassword}
-            setLoginPassword={setLoginPassword}
-            login={login}
-          />
-        } />
-        <Route path='/register' element={
-          <Register
-            registerEmail={registerEmail}
-            setRegisterEmail={setRegisterEmail}
-            registerPassword={registerPassword}
-            setRegisterPassword={setRegisterPassword}
-            register={register} />
-        } />
-        <Route path='/' element={
-          <User user={user} logout={logout}/>
-        } />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={
+            <Login
+              loginEmail={loginEmail}
+              setLoginEmail={setLoginEmail}
+              loginPassword={loginPassword}
+              setLoginPassword={setLoginPassword}
+              login={login}
+            />
+          } />
+          <Route path='/register' element={
+            <Register
+              registerEmail={registerEmail}
+              setRegisterEmail={setRegisterEmail}
+              registerPassword={registerPassword}
+              setRegisterPassword={setRegisterPassword}
+              register={register} />
+          } />
+          <Route path={`/user`} element={
+            <User user={user} logout={logout} />
+          } />
+        </Routes>
+      </Router>
   );
 }
 

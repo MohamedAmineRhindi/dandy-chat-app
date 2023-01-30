@@ -1,0 +1,42 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-container>h1 {
+    color: darkblue;
+    font-size: 3rem;
+    letter-spacing: .5px;
+    margin-bottom: 1em;
+}
+
+.home-container--link {
+    text-decoration: none;
+    font-size: 1.25rem;
+    margin: 0 1.5em .75em;
+    border: 1px solid darkblue;
+    background-color: darkblue;
+    color: beige;
+    border-radius: 8px;
+    text-align: center;
+    padding: .65em 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.home-container--a {
+
+    text-align: center;
+    text-decoration: none;
+    font-style: italic;
+    color: black;
+
+}

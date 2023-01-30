@@ -1,13 +1,20 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from 'firebase/auth';
+import { auth } from './firebaseConfig'
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Login from './pages/Login';
 import Register from './pages/Register';
+import User from './pages/User';
 
 function App() {
 
@@ -15,22 +22,47 @@ function App() {
   const [registerPassword, setRegisterPassword] = useState("")
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
+  const [user, setUser] = useState({})
 
-  // const register = async () => {
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
-  // }
+  }, [])
 
-  // const login = async () => {
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      )
+      console.log(user)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
-  // }
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      )
+      console.log(user)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
-  // const logout = async () => {
-
-  // }
+  const logout = async () => {
+    await signOut(auth)
+  }
 
   return (
     <Router>
-
       <Routes>
         <Route path='/login' element={
           <Login
@@ -38,6 +70,7 @@ function App() {
             setLoginEmail={setLoginEmail}
             loginPassword={loginPassword}
             setLoginPassword={setLoginPassword}
+            login={login}
           />
         } />
         <Route path='/register' element={
@@ -45,10 +78,13 @@ function App() {
             registerEmail={registerEmail}
             setRegisterEmail={setRegisterEmail}
             registerPassword={registerPassword}
-            setRegisterPassword={setRegisterPassword} />
+            setRegisterPassword={setRegisterPassword}
+            register={register} />
+        } />
+        <Route path='/' element={
+          <User user={user} logout={logout}/>
         } />
       </Routes>
-
     </Router>
   );
 }

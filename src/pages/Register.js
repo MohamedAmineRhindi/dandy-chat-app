@@ -6,7 +6,8 @@ const Register = ({
     registerEmail,
     setRegisterEmail,
     registerPassword,
-    setRegisterPassword }) => {
+    setRegisterPassword,
+    register }) => {
 
     const [cPassword, setCPassword] = useState("")
 
@@ -16,6 +17,7 @@ const Register = ({
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        register()
     }
 
     return (

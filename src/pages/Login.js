@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './auth.css'
 
@@ -6,7 +6,8 @@ const Login = ({
     loginEmail,
     setLoginEmail,
     loginPassword,
-    setLoginPassword }) => {
+    setLoginPassword,
+    login }) => {
 
     const handleChange = (e, setState) => {
         setState(e.target.value)
@@ -14,6 +15,7 @@ const Login = ({
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        login()
     }
 
     return (
